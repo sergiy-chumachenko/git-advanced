@@ -4,7 +4,6 @@ class MyMetaClass(type):
         print("my custom method called")
 
     def print_two_times(self):
-        print(self.__dir__())
         print(f"1 - {self}\n2 - {self}")
 
     @classmethod
@@ -33,11 +32,31 @@ class MyClass(metaclass=MyMetaClass):
     pass
 
 
+class MyStr(str):
+    # def greetings(self):
+    #     print(f"Hello! I'm {self}!")
+
+    # def __init__(self, *args, **kwargs):
+    #     self.greetings()
+
+    def __str__(self):
+        return super().__str__() + ' changed'
+
+    # def __repr__(self):
+    #     return f"my repr -> {self.__class__.__name__}: {self}"
+
+
 if __name__ == "__main__":
     print("Start...")
     my_obj = MyClass("hi")
     my_obj.my_custom_method()
     my_obj.print_two_times()
 
-    print(MyClass.__mro__)
-    print(MyMetaClass.__mro__)
+    print('Some new code snippet!')
+
+    mystr = MyStr
+    for letter in 'hello':
+        print(mystr(letter))
+
+
+
