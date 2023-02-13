@@ -10,7 +10,6 @@ class MyMetaClass(type):
     def __prepare__(mcs, cls, bases):
         namespace = super().__prepare__(cls, bases)
         print('Namespace for object configured!')
-        print(namespace)
         return namespace
 
     def __new__(mcs, cls, bases, dct):
@@ -20,7 +19,6 @@ class MyMetaClass(type):
         class_ = super().__new__(mcs, cls, bases, dct)
 
         print('New object created!')
-        print(class_)
         return class_
 
     def __init__(cls, *args, **kwargs):
@@ -33,27 +31,14 @@ class MyClass(metaclass=MyMetaClass):
 
 
 class MyStr(str):
-    # def greetings(self):
-    #     print(f"Hello! I'm {self}!")
-
-    # def __init__(self, *args, **kwargs):
-    #     self.greetings()
-
     def __str__(self):
         return super().__str__() + ' changed'
 
-    # def __repr__(self):
-    #     return f"my repr -> {self.__class__.__name__}: {self}"
-
 
 if __name__ == "__main__":
-    print("Start...")
     my_obj = MyClass("hi")
     my_obj.my_custom_method()
     my_obj.print_two_times()
-
-    print('Some new code snippet!')
-
     mystr = MyStr
     for letter in 'hello':
         print(mystr(letter))
